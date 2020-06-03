@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
     Vector3 mouseEnd;
 
     float minDragDistance = 15f;
-    float zDepth = 15f;
+    //float zDepth = 15f;
 
     void Awake()
     {
@@ -45,7 +45,7 @@ public class GameController : MonoBehaviour
             {
                 //throw ball
 
-                Vector3 hitPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, zDepth);
+                Vector3 hitPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Random.Range(10f,20f));
 
                 hitPos = Camera.main.ScreenToWorldPoint(hitPos);
 
