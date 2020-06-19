@@ -108,10 +108,10 @@ namespace UnityStandardAssets.Utility.Inspector
             EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
 
             // Don't make child fields be indented
-            var indent = EditorGUI.indentLevel;
+            int indent = EditorGUI.indentLevel;
             EditorGUI.indentLevel = 0;
 
-            var entries = property.FindPropertyRelative("entries");
+            SerializedProperty entries = property.FindPropertyRelative("entries");
 
             if (entries.arraySize > 0)
             {
@@ -124,7 +124,7 @@ namespace UnityStandardAssets.Utility.Inspector
                 {
                     y += k_LineHeight + k_Spacing;
 
-                    var entry = entries.GetArrayElementAtIndex(i);
+                    SerializedProperty entry = entries.GetArrayElementAtIndex(i);
 
                     float rowX = x;
 
@@ -167,13 +167,13 @@ namespace UnityStandardAssets.Utility.Inspector
             // add & sort buttons
             y += k_LineHeight + k_Spacing;
 
-            var addButtonRect = new Rect(position.x + position.width - 120, y, 60, k_LineHeight);
+            Rect addButtonRect = new Rect(position.x + position.width - 120, y, 60, k_LineHeight);
             if (GUI.Button(addButtonRect, "Add"))
             {
                 entries.InsertArrayElementAtIndex(entries.arraySize);
             }
 
-            var sortButtonRect = new Rect(position.x + position.width - 60, y, 60, k_LineHeight);
+            Rect sortButtonRect = new Rect(position.x + position.width - 60, y, 60, k_LineHeight);
             if (GUI.Button(sortButtonRect, "Sort"))
             {
                 bool changed = true;
@@ -182,8 +182,8 @@ namespace UnityStandardAssets.Utility.Inspector
                     changed = false;
                     for (int i = 0; i < entries.arraySize - 1; ++i)
                     {
-                        var e1 = entries.GetArrayElementAtIndex(i);
-                        var e2 = entries.GetArrayElementAtIndex(i + 1);
+                        SerializedProperty e1 = entries.GetArrayElementAtIndex(i);
+                        SerializedProperty e2 = entries.GetArrayElementAtIndex(i + 1);
 
                         if (e1.FindPropertyRelative("delay").floatValue > e2.FindPropertyRelative("delay").floatValue)
                         {

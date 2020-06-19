@@ -8,7 +8,7 @@ namespace UnityStandardAssets.Utility
 {
     public class AutoMobileShaderSwitch : MonoBehaviour
     {
-        [SerializeField] private ReplacementList m_ReplacementList;
+        [SerializeField] private readonly ReplacementList m_ReplacementList;
 
         // Use this for initialization
         private void OnEnable()
@@ -86,8 +86,8 @@ namespace UnityStandardAssets.Utility.Inspector
     [CustomPropertyDrawer(typeof(AutoMobileShaderSwitch.ReplacementList))]
     public class ReplacementListDrawer : PropertyDrawer
     {
-        const float k_LineHeight = 18;
-        const float k_Spacing = 4;
+        private const float k_LineHeight = 18;
+        private const float k_Spacing = 4;
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
@@ -98,20 +98,20 @@ namespace UnityStandardAssets.Utility.Inspector
             float inspectorWidth = position.width;
 
             // Don't make child fields be indented
-            var indent = EditorGUI.indentLevel;
+            int indent = EditorGUI.indentLevel;
             EditorGUI.indentLevel = 0;
 
-            var items = property.FindPropertyRelative("items");
-            var titles = new string[] { "Original", "Replacement", "" };
-            var props = new string[] { "original", "replacement", "-" };
-            var widths = new float[] { .45f, .45f, .1f };
+            SerializedProperty items = property.FindPropertyRelative("items");
+            string[] titles = new string[] { "Original", "Replacement", "" };
+            string[] props = new string[] { "original", "replacement", "-" };
+            float[] widths = new float[] { .45f, .45f, .1f };
             const float lineHeight = 18;
             bool changedLength = false;
             if (items.arraySize > 0)
             {
                 for (int i = -1; i < items.arraySize; ++i)
                 {
-                    var item = items.GetArrayElementAtIndex(i);
+                    SerializedProperty item = items.GetArrayElementAtIndex(i);
 
                     float rowX = x;
                     for (int n = 0; n < props.Length; ++n)
@@ -172,7 +172,7 @@ namespace UnityStandardAssets.Utility.Inspector
             }
 
             // add button
-            var addButtonRect = new Rect((x + position.width) - widths[widths.Length - 1] * inspectorWidth, y,
+            Rect addButtonRect = new Rect((x + position.width) - widths[widths.Length - 1] * inspectorWidth, y,
                                          widths[widths.Length - 1] * inspectorWidth, lineHeight);
             if (GUI.Button(addButtonRect, "+"))
             {

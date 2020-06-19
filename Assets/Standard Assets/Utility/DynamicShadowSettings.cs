@@ -28,9 +28,8 @@ namespace UnityStandardAssets.Utility
         private void Update()
         {
             Ray ray = new Ray(Camera.main.transform.position, -Vector3.up);
-            RaycastHit hit;
             float height = transform.position.y;
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out RaycastHit hit))
             {
                 height = hit.distance;
             }

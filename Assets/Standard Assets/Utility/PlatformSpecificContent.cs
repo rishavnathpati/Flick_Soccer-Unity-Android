@@ -21,13 +21,13 @@ namespace UnityStandardAssets.Utility
         }
 
         [SerializeField]
-        private BuildTargetGroup m_BuildTargetGroup;
+        private readonly BuildTargetGroup m_BuildTargetGroup;
         [SerializeField]
-        private GameObject[] m_Content = new GameObject[0];
+        private readonly GameObject[] m_Content = new GameObject[0];
         [SerializeField]
-        private MonoBehaviour[] m_MonoBehaviours = new MonoBehaviour[0];
+        private readonly MonoBehaviour[] m_MonoBehaviours = new MonoBehaviour[0];
         [SerializeField]
-        private bool m_ChildrenOfThisObject;
+        private readonly bool m_ChildrenOfThisObject;
 
 #if !UNITY_EDITOR
 	void OnEnable()
@@ -35,13 +35,7 @@ namespace UnityStandardAssets.Utility
 		CheckEnableContent();
 	}
 #else
-        public int callbackOrder
-        {
-            get
-            {
-                return 1;
-            }
-        }
+        public int callbackOrder => 1;
 #endif
 
 #if UNITY_EDITOR
@@ -97,7 +91,7 @@ namespace UnityStandardAssets.Utility
         {
             if (m_Content.Length > 0)
             {
-                foreach (var g in m_Content)
+                foreach (GameObject g in m_Content)
                 {
                     if (g != null)
                     {
@@ -114,7 +108,7 @@ namespace UnityStandardAssets.Utility
             }
             if (m_MonoBehaviours.Length > 0)
             {
-                foreach (var monoBehaviour in m_MonoBehaviours)
+                foreach (MonoBehaviour monoBehaviour in m_MonoBehaviours)
                 {
                     monoBehaviour.enabled = enabled;
                 }

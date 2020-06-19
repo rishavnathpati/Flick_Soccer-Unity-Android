@@ -14,7 +14,7 @@ namespace UnityStandardAssets.CrossPlatformInput.Inspector
 
         static CrossPlatformInitialize()
         {
-            var defines = GetDefinesList(buildTargetGroups[0]);
+            List<string> defines = GetDefinesList(buildTargetGroups[0]);
             if (!defines.Contains("CROSS_PLATFORM_INPUT"))
             {
                 SetEnabled("CROSS_PLATFORM_INPUT", true, false);
@@ -51,7 +51,7 @@ namespace UnityStandardAssets.CrossPlatformInput.Inspector
         [MenuItem("Mobile Input/Enable", true)]
         private static bool EnableValidate()
         {
-            var defines = GetDefinesList(mobileBuildTargetGroups[0]);
+            List<string> defines = GetDefinesList(mobileBuildTargetGroups[0]);
             return !defines.Contains("MOBILE_INPUT");
         }
 
@@ -75,19 +75,19 @@ namespace UnityStandardAssets.CrossPlatformInput.Inspector
         [MenuItem("Mobile Input/Disable", true)]
         private static bool DisableValidate()
         {
-            var defines = GetDefinesList(mobileBuildTargetGroups[0]);
+            List<string> defines = GetDefinesList(mobileBuildTargetGroups[0]);
             return defines.Contains("MOBILE_INPUT");
         }
 
 
-        private static BuildTargetGroup[] buildTargetGroups = new BuildTargetGroup[]
+        private static readonly BuildTargetGroup[] buildTargetGroups = new BuildTargetGroup[]
             {
                 BuildTargetGroup.Standalone,
                 BuildTargetGroup.Android,
                 BuildTargetGroup.iOS
             };
 
-        private static BuildTargetGroup[] mobileBuildTargetGroups = new BuildTargetGroup[]
+        private static readonly BuildTargetGroup[] mobileBuildTargetGroups = new BuildTargetGroup[]
             {
                 BuildTargetGroup.Android,
                 BuildTargetGroup.iOS,
@@ -100,9 +100,9 @@ namespace UnityStandardAssets.CrossPlatformInput.Inspector
         private static void SetEnabled(string defineName, bool enable, bool mobile)
         {
             //Debug.Log("setting "+defineName+" to "+enable);
-            foreach (var group in mobile ? mobileBuildTargetGroups : buildTargetGroups)
+            foreach (BuildTargetGroup group in mobile ? mobileBuildTargetGroups : buildTargetGroups)
             {
-                var defines = GetDefinesList(group);
+                List<string> defines = GetDefinesList(group);
                 if (enable)
                 {
                     if (defines.Contains(defineName))

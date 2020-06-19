@@ -4,32 +4,31 @@ public class GameController : MonoBehaviour
 {
 
     [SerializeField]
-    GameObject ballPrefab;
+    private readonly GameObject ballPrefab;
 
     [SerializeField]
-    float ballForce;
+    private readonly float ballForce;
+    private readonly GameObject ballInstance;
+    private Vector3 mouseStart;
+    private Vector3 mouseEnd;
+    private readonly float minDragDistance = 15f;
 
-    GameObject ballInstance;
-    Vector3 mouseStart;
-    Vector3 mouseEnd;
-
-    float minDragDistance = 15f;
     //float zDepth = 15f;
 
-    void Awake()
+    private void Awake()
     {
 
     }
 
 
     // Use this for initialization
-    void Start()
+    private void Start()
     {
-        CreateBall();
+        //CreateBall();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
 
         if (Input.GetMouseButtonDown(0))
@@ -45,7 +44,7 @@ public class GameController : MonoBehaviour
             {
                 //throw ball
 
-                Vector3 hitPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Random.Range(10f,20f));
+                Vector3 hitPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Random.Range(10f, 20f));
 
                 hitPos = Camera.main.ScreenToWorldPoint(hitPos);
 
@@ -56,11 +55,5 @@ public class GameController : MonoBehaviour
                 Invoke("CreateBall", 2f);
             }
         }
-    }
-
-    void CreateBall()
-    {
-
-        ballInstance = Instantiate(ballPrefab, ballPrefab.transform.position, Quaternion.identity) as GameObject;
     }
 }

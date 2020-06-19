@@ -15,8 +15,8 @@ namespace UnityStandardAssets.CrossPlatformInput
 
         private static VirtualInput activeInput;
 
-        private static VirtualInput s_TouchInput;
-        private static VirtualInput s_HardwareInput;
+        private static readonly VirtualInput s_TouchInput;
+        private static readonly VirtualInput s_HardwareInput;
 
 
         static CrossPlatformInputManager()
@@ -164,10 +164,7 @@ namespace UnityStandardAssets.CrossPlatformInput
         }
 
 
-        public static Vector3 mousePosition
-        {
-            get { return activeInput.MousePosition(); }
-        }
+        public static Vector3 mousePosition => activeInput.MousePosition();
 
 
         public static void SetVirtualMousePositionX(float f)
@@ -225,16 +222,10 @@ namespace UnityStandardAssets.CrossPlatformInput
             }
 
 
-            public float GetValue
-            {
-                get { return m_Value; }
-            }
+            public float GetValue => m_Value;
 
 
-            public float GetValueRaw
-            {
-                get { return m_Value; }
-            }
+            public float GetValueRaw => m_Value;
         }
 
         // a controller gameobject (eg. a virtual GUI button) should call the
@@ -291,28 +282,13 @@ namespace UnityStandardAssets.CrossPlatformInput
 
 
             // these are the states of the button which can be read via the cross platform input system
-            public bool GetButton
-            {
-                get { return m_Pressed; }
-            }
+            public bool GetButton => m_Pressed;
 
 
-            public bool GetButtonDown
-            {
-                get
-                {
-                    return m_LastPressedFrame - Time.frameCount == -1;
-                }
-            }
+            public bool GetButtonDown => m_LastPressedFrame - Time.frameCount == -1;
 
 
-            public bool GetButtonUp
-            {
-                get
-                {
-                    return (m_ReleasedFrame == Time.frameCount - 1);
-                }
-            }
+            public bool GetButtonUp => (m_ReleasedFrame == Time.frameCount - 1);
         }
     }
 }

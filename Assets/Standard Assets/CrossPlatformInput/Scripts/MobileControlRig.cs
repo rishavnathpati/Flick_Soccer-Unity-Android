@@ -25,13 +25,7 @@ namespace UnityStandardAssets.CrossPlatformInput
 		CheckEnableControlRig();
 	}
 #else
-        public int callbackOrder
-        {
-            get
-            {
-                return 1;
-            }
-        }
+        public int callbackOrder => 1;
 #endif
 
         private void Start()

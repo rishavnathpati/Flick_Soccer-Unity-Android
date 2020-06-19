@@ -6,7 +6,7 @@ namespace UnityStandardAssets.CrossPlatformInput
     {
         public string axis;
 
-        void Update() { }
+        private void Update() { }
 
         public void HandleInput(float value)
         {
